@@ -12,12 +12,12 @@ from resources.match_selection import UserMatch
 
 
 app=Flask(__name__)
+app.config["JWT_SECRET_KEY"]="$#@!"
+app.config['PROPOGATE_EXCEPTIONS']=True
+
 api=Api(app)
 jwt=JWTManager(app)
-app.config["JWT_SECRET_KEY"]="$#@!"
 
-
-app.config['PROPOGATE_EXCEPTIONS']=True
 
 @jwt.unauthorized_loader
 def missing_token_callback(error):

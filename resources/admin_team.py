@@ -12,13 +12,13 @@ class CountryPlayers(Resource):
         parser=reqparse.RequestParser()
         parser.add_argument('match_id',type=str,required=True,help='Error in getting match id')
         data=parser.parse_args()
-        try:
-            countries=query(f"""SELECT country1,country2 FROM match_user WHERE match_id='{data['match_id']}'""",return_json=False)
-        except:
-            return {'messsage':'error in getting countries'}
-        print(countries[0]['country1'])
-        try:
-            return query(f"""SELECT player_id,country FROM country_team WHERE country in('{countries[0]['country1']}',
-            '{countries[0]['country2']}')""")
-        except:
-            return {'message':'error in getting players of country one and country two'}
+        # try:
+        countries=query(f"""SELECT country1,country2 FROM match_user WHERE match_id='{data['match_id']}'""",return_json=False)
+        # except:
+        #     return {'messsage':'error in getting countries'}
+        # print(countries[0]['country1'])
+        # try:
+        #     return query(f"""SELECT player_id,country FROM country_team WHERE country in('{countries[0]['country1']}',
+        #     '{countries[0]['country2']}')""")
+        # except:
+        #     return {'message':'error in getting players of country one and country two'}
