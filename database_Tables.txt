@@ -1,0 +1,46 @@
+create schema yorking;
+use yorking;
+
+create table country_team(
+player_id varchar(100) primary key,
+player_name varchar(200),
+category varchar(200),
+points int default 6,
+country varchar(200));
+
+create table user_details(
+user_id varchar(100) primary key,
+user_password varchar(100));
+
+create table match_user(
+match_id varchar(100) primary key,
+country1 varchar(200),
+country2 varchar(200),
+match_status varchar(100) default 'notoccured');
+
+create table match_performance(
+runs int default 0,
+catches int default 0,
+wickets int default 0,
+player_id varchar(100),
+match_id varchar(100),
+foreign key(player_id) references country_team(player_id) on delete cascade,
+foreign key(match_id) references match_user(match_id) on delete cascade,
+primary key(player_id,match_id));
+
+create table user_team(
+captain varchar(200) default 'not selected',
+stars int default 0,
+user_id varchar(100),
+match_id varchar(100),
+foreign key(user_id) references user_details(user_id) on delete cascade,
+foreign key(match_id) references match_user(match_id) on delete cascade,
+primary key(user_id,match_id));
+
+create table choosen_players(
+user_id varchar(100),
+match_id varchar(100),
+player_id varchar(100),
+foreign key(user_id,match_id) references user_team(user_id,match_id) on delete cascade,
+foreign key(player_id) references country_team(player_id) on delete cascade,
+primary key(user_id,match_id,player_id));
