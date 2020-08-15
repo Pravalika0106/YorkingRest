@@ -55,4 +55,5 @@ api.add_resource(UserMatch,'/user_match_selection')
 
 
 
-app.run(debug=True)
+if __name__=="__main__":
+    app.run()
